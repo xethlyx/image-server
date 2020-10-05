@@ -6,6 +6,6 @@ RUN npm i
 COPY . .
 RUN npm run-script build
 
-CMD npm run-script start
+CMD ["npm", "run-script", "start"]
 
 EXPOSE 8880
