@@ -1,32 +1,32 @@
 {
-  "name": "gyazo",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "nuxt-ts --port 3000",
-    "build": "nuxt-ts build",
-    "generate": "nuxt-ts generate",
-    "start": "nuxt-ts start"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@nuxt/http": "^0.5.12",
-    "@nuxt/typescript-runtime": "^2.0.0",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "fluent-ffmpeg": "^2.1.2",
-    "formidable": "^1.2.2",
-    "nuxt": "^2.14.5",
-    "sequelize": "^6.3.5",
-    "sqlite3": "^5.0.0",
-    "tmp-promise": "^3.0.2"
-  },
-  "devDependencies": {
-    "@nuxt/types": "^2.14.5",
-    "@nuxt/typescript-build": "^2.0.3",
-    "@types/fluent-ffmpeg": "^2.1.15",
-    "@types/formidable": "^1.0.31"
-  }
+	"name": "image-server",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "nuxt-ts --port 3000",
+		"build": "nuxt-ts build",
+		"generate": "nuxt-ts generate",
+		"start": "nuxt-ts start"
+	},
+	"author": "xethlyx",
+	"license": "ISC",
+	"dependencies": {
+		"@nuxt/http": "^0.5.12",
+		"@nuxt/typescript-runtime": "^2.0.0",
+		"body-parser": "^1.19.0",
+		"express": "^4.17.1",
+		"fluent-ffmpeg": "^2.1.2",
+		"formidable": "^1.2.2",
+		"nuxt": "^2.14.5",
+		"sequelize": "^6.3.5",
+		"sqlite3": "^5.0.0",
+		"tmp-promise": "^3.0.2"
+	},
+	"devDependencies": {
+		"@nuxt/types": "^2.14.5",
+		"@nuxt/typescript-build": "^2.0.3",
+		"@types/fluent-ffmpeg": "^2.1.15",
+		"@types/formidable": "^1.0.31"
+	}
 }
