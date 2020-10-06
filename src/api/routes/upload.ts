@@ -6,12 +6,14 @@ import ffmpeg from 'fluent-ffmpeg';
 import { file } from 'tmp-promise';
 
 import bodyParser from 'body-parser';
-import { validatedSettings } from '~/src/settings';
+import { validatedSettings } from '../settings';
 
 const uploadRouter = Router();
 
 if (!validatedSettings.ALLOWED_IPS.includes('*')) {
     uploadRouter.use((req, res, next) => {
+        console.log(`IP ${req.ip} was denied access to the upload endpoint`);
+        
         if (!validatedSettings.ALLOWED_IPS.includes(req.ip)) {
             res.status(403).end('Forbidden');
             return;

@@ -1,5 +1,5 @@
 const envSettings: {[variable: string]: any} = {
-    ALLOWED_IPS: 'localhost',
+    ALLOWED_IPS: '127.0.0.1',
     DATABASE: 'sqlite::memory:',
     CLEANUP: '3600000,604800000'
 }
@@ -21,12 +21,7 @@ export function validate() {
     }
 
     const throwError = (type: string, message: string, fatal: boolean) => {
-        console.warn('#################################################################');
-        console.warn(`${type}`);
-        console.warn('');
-        console.warn(message);
-        console.warn('#################################################################');
-
+        console.warn(`#################################################################\n${type}\n\n${message}\n#################################################################`);
         if (fatal) process.exit(1);
     }
 
@@ -56,8 +51,8 @@ export function validate() {
             );
         }
     
-        for (const splitCleanupVar in splitCleanup) {
-            if (!Number.isSafeInteger(splitCleanupVar)) {
+        for (const splitCleanupVar of splitCleanup) {
+            if (!Number.isSafeInteger(Number(splitCleanupVar))) {
                 throwError(
                     'ERROR',
                     'Value passed to environment variable "CLEANUP" was not an integer!',
@@ -76,13 +71,13 @@ export function validate() {
 
         
         validatedSettings.CLEANUP = {
-            interval: envSettings.CLEANUP.split(',')[0],
-            maxAge: envSettings.CLEANUP.split(',')[1],
+            interval: Number(envSettings.CLEANUP.split(',')[0]),
+            maxAge: Number(envSettings.CLEANUP.split(',')[1]),
         }
     }
 
-    validatedSettings.ALLOWED_IPS = envSettings.CLEANUP.split(',');
+    validatedSettings.ALLOWED_IPS = envSettings.ALLOWED_IPS.split(',');
     validatedSettings.DATABASE = envSettings.DATABASE;
 
-    console.log('Your settings are: ' + validatedSettings);
+    console.log('Your settings are: ' + JSON.stringify(validatedSettings));
 }

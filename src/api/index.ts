@@ -1,6 +1,6 @@
 import express from 'express';
 import { DataTypes, Sequelize, Op } from 'sequelize';
-import { validate, validatedSettings } from '../settings';
+import { validate, validatedSettings } from './settings';
 import contentRouter from './routes/content';
 import existsRouter from './routes/exists';
 import uploadRouter from './routes/upload';
