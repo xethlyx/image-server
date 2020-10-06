@@ -5,14 +5,14 @@ import fs from 'fs';
 import ffmpeg from 'fluent-ffmpeg';
 import { file } from 'tmp-promise';
 
-import settings from '../../config/settings.json';
 import bodyParser from 'body-parser';
+import { validatedSettings } from '~/src/settings';
 
 const uploadRouter = Router();
 
-if (settings.restrictIps) {
+if (!validatedSettings.ALLOWED_IPS.includes('*')) {
     uploadRouter.use((req, res, next) => {
-        if (!settings.allowedIps.includes(req.ip)) {
+        if (!validatedSettings.ALLOWED_IPS.includes(req.ip)) {
             res.status(403).end('Forbidden');
             return;
         }

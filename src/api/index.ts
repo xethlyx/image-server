@@ -1,17 +1,13 @@
 import express from 'express';
 import { DataTypes, Sequelize, Op } from 'sequelize';
+import { validate, validatedSettings } from '../settings';
 import contentRouter from './routes/content';
 import existsRouter from './routes/exists';
 import uploadRouter from './routes/upload';
-import settings from '../config/settings.json';
 
-export const sequelize = new Sequelize('database', 'username', 'password', {
-    dialect: 'sqlite',
-    storage: './sqlite.db',
-    dialectOptions: {
+validate();
 
-    }
-});
+export const sequelize = new Sequelize(validatedSettings.DATABASE);
 
 sequelize.authenticate()
     .then(async result => {
@@ -65,7 +61,7 @@ sequelize.authenticate()
     })
     .catch(error => {
         console.error('Unable to connect to the database: ', error);
-        return error;
+        process.exit(1);
     });
 
 const app = express();
@@ -77,7 +73,7 @@ app.use('/upload', uploadRouter);
 app.use('/content', contentRouter);
 app.use('/exists', existsRouter);
 
-if (settings.cleanup.enabled) {
+if (validatedSettings.CLEANUP.interval > 0) {
     setInterval(async() => {
         let deleted = 0;
 
@@ -87,7 +83,7 @@ if (settings.cleanup.enabled) {
             const result = await model.destroy({
                 where: {
                     createdAt: {
-                        [Op.lt]: Date.now() - settings.cleanup.maxAge
+                        [Op.lt]: Date.now() - validatedSettings.CLEANUP.maxAge
                     }
                 }
             });
@@ -96,7 +92,7 @@ if (settings.cleanup.enabled) {
         }
 
         console.log(`Deleted ${deleted} old entries.`)
-    }, settings.cleanup.interval);
+    }, validatedSettings.CLEANUP.interval);
 }
 
 export default app;
