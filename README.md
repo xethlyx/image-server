@@ -17,7 +17,7 @@ By default, this server automatically cleans up after a time span of 7 days. Thi
 version: '2'
 services:
     db:
-        image: postgres
+        image: postgres:alpine
         restart: always
         environment:
             POSTGRES_PASSWORD: YOURPASSWORD
