@@ -12,9 +12,8 @@ const uploadRouter = Router();
 
 if (!validatedSettings.ALLOWED_IPS.includes('*')) {
     uploadRouter.use((req, res, next) => {
-        console.log(`IP ${req.ip} was denied access to the upload endpoint`);
-        
         if (!validatedSettings.ALLOWED_IPS.includes(req.ip)) {
+            console.log(`IP ${req.ip} was denied access to the upload endpoint`);
             res.status(403).end('Forbidden');
             return;
         }
