@@ -142,6 +142,7 @@ uploadRouter.post('/video', (req, res) => {
             .renice(20)
             .inputFormat('mp4')
             .outputFormat('gif')
+            .outputOptions('-fs 8M')
             .addOption('-vf', 'split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse')
             .noAudio()
             .on('end', () => {
