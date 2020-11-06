@@ -84,7 +84,7 @@ uploadRouter.post('/image', (req, res) => {
             value: data
         });
 
-        res.status(200).end(`https://i.xethlyx.com/png/${fileName}`);
+        res.status(200).end(`https://${req.headers.host}/png/${fileName}`);
 
         fs.unlink(oldPath, (error) => {
             if (error) console.warn(error.message);
@@ -170,7 +170,7 @@ uploadRouter.post('/video', (req, res) => {
 
         cleanup();
 
-        res.status(200).end(`https://i.xethlyx.com/anim/${fileName}`);
+        res.status(200).end(`https://${req.headers.host}/anim/${fileName}`);
 
         fs.unlink(oldPath, (error) => {
             if (error) console.warn(error.message);
@@ -259,7 +259,7 @@ uploadRouter.post('/video-noconvert', (req, res) => {
             value: data
         });
 
-        res.status(200).end(`https://i.xethlyx.com/video/${fileName}`);
+        res.status(200).end(`https://${req.headers.host}/video/${fileName}`);
 
         fs.unlink(oldPath, (error) => {
             if (error) console.warn(error.message);
